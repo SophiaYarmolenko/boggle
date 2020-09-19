@@ -1,15 +1,24 @@
 package com.company;
 
-import edu.princeton.cs.algs4.TrieST;
 import java.util.ArrayList;
 
 public class BoggleSolver
 {
-    private TrieST<Integer> dict;
+    private class Tile{
+        public int n;
+        public int m;
+        public char a;
+        public Tile(int b,int c, char d){
+            n = b;
+            m = c;
+            a = d;
+        }
+    }
+    private Trie dict;
     // Initializes the data structure using the given array of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
     public BoggleSolver(String[] dictionary){
-        dict = new TrieST<>();
+        dict = new Trie();
         for(String each : dictionary){dict.put(each,each.length());}
     }
 
@@ -19,18 +28,17 @@ public class BoggleSolver
        return null;
     }
 
-    private Iterable<Character> neighbours(BoggleBoard board, int n, int m){
-        ArrayList<Character> result = new ArrayList<>();
-        if(m>0&&n>0){
-            result.add(board.getLetter(n-1,m-1));
-            result.add(board.getLetter(n,m-1));
-            result.add(board.getLetter(n-1,m));
-        }
-        if(m>0){}
-        if(m<4){result.add(board.getLetter(n,m+1));}
-        if(n>0){}
-        if(n<4){result.add(board.getLetter(n+1,m));}
-
+    private Iterable<Tile> neighbours(BoggleBoard board, int n, int m){
+        ArrayList<Tile> result = new ArrayList<>();
+        if(m>0){result.add(new Tile(n,m-1,board.getLetter(n,m-1)));}
+        if(m<4){result.add(new Tile(n,m+1,board.getLetter(n,m+1)));}
+        if(n>0){result.add(new Tile(n-1,m,board.getLetter(n-1,m)));}
+        if(n<4){result.add(new Tile(n+1,m,board.getLetter(n+1,m)));}
+        if(m>0&&n>0){result.add(new Tile(n-1,m-1,board.getLetter(n-1,m-1)));}
+        if(m>0&&n<4){result.add(new Tile(n+1,m-1,board.getLetter(n+1,m-1)));}
+        if(m<4&&n>0){result.add(new Tile(n-1,m+1,board.getLetter(n-1,m+1)));}
+        if(m<4&&n<4){result.add(new Tile(n+1,m+1,board.getLetter(n+1,m+1)));}
+        return result;
     }
 
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
