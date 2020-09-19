@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-
 public class BoggleSolver
 {
     private class Tile{
@@ -28,8 +27,10 @@ public class BoggleSolver
        return null;
     }
 
-    private Iterable<Tile> neighbours(BoggleBoard board, int n, int m){
+    private Iterable<Tile> neighbours(BoggleBoard board, Tile tile){
         ArrayList<Tile> result = new ArrayList<>();
+        int n = tile.n;
+        int m = tile.m;
         if(m>0){result.add(new Tile(n,m-1,board.getLetter(n,m-1)));}
         if(m<4){result.add(new Tile(n,m+1,board.getLetter(n,m+1)));}
         if(n>0){result.add(new Tile(n-1,m,board.getLetter(n-1,m)));}
@@ -41,6 +42,14 @@ public class BoggleSolver
         return result;
     }
 
+    private void words(Tile tile, ArrayList res, BoggleBoard board, Node node){
+        if(node.val!=0){}
+        for(Tile each : neighbours(board,tile)){
+            if(node.contains(each.a)){
+
+            }
+        }
+    }
     // Returns the score of the given word if it is in the dictionary, zero otherwise.
     // (You can assume the word contains only the uppercase letters A through Z.)
     public int scoreOf(String word){return 0;}

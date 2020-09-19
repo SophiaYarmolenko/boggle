@@ -1,14 +1,6 @@
 package com.company;
 
 public class Trie {
-    public static class Node {
-        private int val=0;
-        private Node[] next = new Node[R];
-        public boolean contains(char a){
-            int k = a-'A';
-            return next[k]!=null;
-        }
-    }
     private static final int R = 26;
     private Node root;
     private int n;
