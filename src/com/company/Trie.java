@@ -6,6 +6,7 @@ public class Trie {
     private int n;
 
     public Trie(){}
+    public Node root(){return root;}
 
     public int get(String key) {
         if (key == null) throw new IllegalArgumentException("argument to get() is null");
@@ -17,7 +18,8 @@ public class Trie {
         if (x == null) return null;
         if (d == key.length()) return x;
         char c = key.charAt(d);
-        return get(x.next[c], key, d+1);
+        int k = c-'A';
+        return get(x.next[k], key, d+1);
     }
     public boolean contains(String key) {
         if (key == null) throw new IllegalArgumentException("argument to contains() is null");
@@ -36,7 +38,8 @@ public class Trie {
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, val, d+1);
+        int k = c-'A';
+        x.next[k] = put(x.next[k], key, val, d+1);
         return x;
     }
     public void delete(String key) {
