@@ -7,8 +7,8 @@ public class Main {
 	BoggleBoard b = new BoggleBoard();
 	BoggleSolver a = new BoggleSolver(in.readAllLines());
 	System.out.println(b.toString());
-//	for(String each : a.getAllValidWords(b)) {
-//		System.out.println(each);
-//	}
+	for(String each : a.getAllValidWords(b)) {
+		System.out.println(each + " "+a.contains(each));
+	}
     }
 }
